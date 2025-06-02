@@ -1,16 +1,102 @@
 <!DOCTYPE html>
-<html>
-<head lang="uk">
+<html lang="uk">
+<head>
     <meta charset="UTF-8">
-    <title>My Page</title>
-
-
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кошик покупок</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-	<span class="product-item">
-		Apple
-		<span class="amount">4</span>
-	</span>
+<div class="container">
+    <!-- Left Panel -->
+    <div class="panel left-panel">
+        <div class="input-row">
+            <input type="text" placeholder="Назва товару">
+            <button class="add-btn" data-tooltip="Додати новий товар до списку">Додати</button>
+        </div>
+
+        <div class="item">
+            <div class="item-row">
+                <div class="name strikethrough">Помідори</div>
+                <div class="controls-container">
+                    <div class="qty-only">2</div>
+                </div>
+                <div class="actions">
+                    <button class="buy-btn inactive" data-tooltip="Позначити як не куплено">Не куплено</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-row">
+                <div class="name">Печиво</div>
+                <div class="controls-container">
+                    <div class="controls">
+                        <button class="circle-btn minus" data-tooltip="Зменшити кількість">−</button>
+                        <div class="qty">2</div>
+                        <button class="circle-btn plus" data-tooltip="Збільшити кількість">+</button>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="buy-btn" data-tooltip="Позначити як куплено">Куплено</button>
+                    <button class="delete-btn" data-tooltip="Видалити товар зі списку">×</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="item highlighted">
+            <div class="item-row">
+                <div class="name"><input class="editable-name" type="text" value="Сир"></div>
+                <div class="controls-container">
+                    <div class="controls">
+                        <button class="circle-btn minus" data-tooltip="Зменшити кількість">−</button>
+                        <div class="qty">1</div>
+                        <button class="circle-btn plus" data-tooltip="Збільшити кількість">+</button>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="buy-btn" data-tooltip="Позначити як куплено">Куплено</button>
+                    <button class="delete-btn" data-tooltip="Видалити товар зі списку">×</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="panel right-panel">
+        <div class="section">
+            <h3>Залишилося</h3>
+            <hr class="divider">
+            <div class="tags">
+                <div class="tag">
+                    Печиво
+                    <div class="tag-qty">2</div>
+                </div>
+                <div class="tag">
+                    Сир
+                    <div class="tag-qty">1</div>
+                </div>
+            </div>
+        </div>
+        <!-- Горизонтальна риска -->
+        <hr class="divider">
+        <div class="section">
+            <h3>Куплено</h3>
+            <hr class="divider">
+            <div class="tags">
+                <div class="tag bought">
+                    <span class="strikethrough">Помідори</span>
+                    <div class="tag-qty">2</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BUY LIST BADGE -->
+<div class="buy-badge">
+    <div class="buy-badge-main">Buy List</div>
+    <div class="buy-badge-extra">Created by:<br>Denis Koriavets</div>
+</div>
 </body>
 </html>
