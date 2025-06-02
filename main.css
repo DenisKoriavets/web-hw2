@@ -406,6 +406,95 @@ input[type="text"]:focus {
 	}
 }
 
+@media (max-width: 700px) {
+	body {
+		padding: 10px;
+	}
+
+	.container {
+		gap: 10px;
+		padding: 0 5px;
+	}
+
+	.panel {
+		padding: 10px;
+	}
+
+	.input-row {
+		flex-direction: column;
+		gap: 8px;
+		margin-bottom: 20px;
+	}
+
+	input[type="text"] {
+		padding: 10px 12px;
+		font-size: 14px;
+	}
+
+	.add-btn {
+		width: 100%;
+		padding: 10px 0;
+		font-size: 14px;
+		box-shadow: none;
+	}
+
+	.item-row {
+		grid-template-columns: 1fr min-content 1fr;
+		gap: 5px;
+	}
+
+	.name, .name.strikethrough {
+		font-size: 14px;
+		max-width: 100px;
+		word-break: break-word;
+	}
+
+	.editable-name {
+		max-width: 100%;
+		font-size: 14px;
+		padding: 4px 8px;
+	}
+
+	.circle-btn {
+		width: 30px;
+		height: 30px;
+		font-size: 18px;
+	}
+
+	.qty, .qty-only {
+		width: 30px;
+		font-size: 14px;
+		padding: 6px 0;
+	}
+
+	.actions {
+		gap: 6px;
+	}
+
+	.buy-btn,
+	.buy-btn.inactive {
+		padding: 6px 12px;
+		font-size: 12px;
+	}
+
+	.delete-btn {
+		padding: 6px 10px;
+		font-size: 14px;
+	}
+
+	.buy-badge {
+		left: 1%;
+		padding: 8px 12px 12px 12px;
+		font-size: 1rem;
+		min-height: 36px;
+	}
+
+	.buy-badge-extra {
+		font-size: 0.85rem;
+	}
+}
+
+
 [data-tooltip] {
 	position: relative;
 }
