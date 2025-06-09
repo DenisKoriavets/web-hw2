@@ -1,20 +1,16 @@
-// Константи для localStorage
 const STORAGE_KEY = 'shoppingListItems';
 const NEXT_ID_KEY = 'shoppingListNextId';
 
-// Дефолтні елементи
 const DEFAULT_ITEMS = [
-    { id: 1, name: 'Помідори', quantity: 2, bought: false },
+    { id: 1, name: 'Помідори', quantity: 2, bought: true },
     { id: 2, name: 'Печиво', quantity: 3, bought: false },
     { id: 3, name: 'Сир', quantity: 1, bought: false }
 ];
 
-// Змінні для даних
 let items = [];
 let nextId = 1;
 let editingItemId = null;
 
-// Завантаження даних із localStorage
 function loadFromStorage() {
     try {
         const savedItems = localStorage.getItem(STORAGE_KEY);
@@ -23,7 +19,6 @@ function loadFromStorage() {
         if (savedItems && JSON.parse(savedItems).length > 0) {
             items = JSON.parse(savedItems);
         } else {
-            // Якщо немає збережених — додаємо дефолтні
             addDefaultItemsIfEmpty();
             return;
         }
@@ -41,17 +36,14 @@ function loadFromStorage() {
     }
 }
 
-// Функція, що додає дефолтні елементи, якщо список пустий
 function addDefaultItemsIfEmpty() {
     if (items.length === 0) {
-        // Копіюємо дефолтні, щоб не мутувати константу
         items = DEFAULT_ITEMS.map(item => ({ ...item }));
         nextId = items.reduce((max, item) => item.id > max ? item.id : max, 0) + 1;
         saveToStorage();
     }
 }
 
-// Збереження даних
 function saveToStorage() {
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
@@ -61,7 +53,6 @@ function saveToStorage() {
     }
 }
 
-// Очищення localStorage
 function clearStorage() {
     try {
         localStorage.removeItem(STORAGE_KEY);
@@ -71,12 +62,10 @@ function clearStorage() {
     }
 }
 
-// Генерація унікального ID
 function generateId() {
     return nextId++;
 }
 
-// Додавання нового елемента
 function addItem(name) {
     if (name.trim() === '') return;
 
@@ -93,16 +82,14 @@ function addItem(name) {
     updateStats();
 }
 
-// Видалення елемента
 function deleteItem(id) {
     items = items.filter(item => item.id !== id);
-    addDefaultItemsIfEmpty(); // додали дефолтні, якщо стало порожньо
+    addDefaultItemsIfEmpty();
     saveToStorage();
     renderItems();
     updateStats();
 }
 
-// Позначити купленим / не купленим
 function toggleBought(id) {
     const item = items.find(item => item.id === id);
     if (item) {
@@ -113,7 +100,6 @@ function toggleBought(id) {
     }
 }
 
-// Оновлення кількості
 function updateQuantity(id, change) {
     const item = items.find(item => item.id === id);
     if (item) {
@@ -127,7 +113,6 @@ function updateQuantity(id, change) {
     }
 }
 
-// Почати редагування
 function startEditing(id) {
     if (editingItemId !== null) {
         finishEditing();
@@ -144,7 +129,6 @@ function startEditing(id) {
     }, 10);
 }
 
-// Завершити редагування
 function finishEditing() {
     if (editingItemId !== null) {
         const input = document.querySelector(`[data-item-id="${editingItemId}"] .editable-name`);
@@ -161,7 +145,6 @@ function finishEditing() {
     }
 }
 
-// Очистити весь список
 function clearAllItems() {
     if (confirm('Ви впевнені, що хочете очистити весь список покупок?')) {
         items = [];
@@ -173,7 +156,6 @@ function clearAllItems() {
     }
 }
 
-// Рендеринг списку
 function renderItems() {
     const itemsList = document.getElementById('itemsList');
     itemsList.innerHTML = '';
@@ -190,7 +172,7 @@ function renderItems() {
         const quantityControls = item.bought
             ? `<div class="qty-only">${item.quantity}</div>`
             : `<div class="controls">
-                 <button class="circle-btn minus" ${item.quantity <= 1 ? 'disabled' : ''} onclick="updateQuantity(${item.id}, -1)" data-tooltip="Зменшити кількість">−</button>
+                 <button class="circle-btn minus" ${item.quantity <= 1 ? 'disabled' : 'data-tooltip="Зменшити кількість"'} onclick="updateQuantity(${item.id}, -1)">−</button>
                  <div class="qty">${item.quantity}</div>
                  <button class="circle-btn plus" onclick="updateQuantity(${item.id}, 1)" data-tooltip="Збільшити кількість">+</button>
                </div>`;
@@ -216,7 +198,6 @@ function renderItems() {
     });
 }
 
-// Оновлення статистики (теги)
 function updateStats() {
     const remainingTags = document.getElementById('remainingTags');
     const boughtTags = document.getElementById('boughtTags');
@@ -247,7 +228,6 @@ function updateStats() {
     });
 }
 
-// Слухачі подій
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('addBtn').addEventListener('click', () => {
         const input = document.getElementById('itemInput');
@@ -264,11 +244,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    const clearBtn = document.getElementById('clearBtn');
-    if (clearBtn) {
-        clearBtn.addEventListener('click', clearAllItems);
-    }
-
     document.addEventListener('click', (e) => {
         if (editingItemId !== null && !e.target.closest('.editable-name') && !e.target.closest('.name')) {
             finishEditing();
@@ -282,7 +257,6 @@ document.addEventListener('DOMContentLoaded', function() {
         saveToStorage();
     });
 
-    // Завантажуємо та рендеримо дані
     loadFromStorage();
     renderItems();
     updateStats();
