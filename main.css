@@ -178,6 +178,14 @@ input[type="text"]:focus {
 	box-shadow: 0 3px 0 0 var(--color-delete-shadow);
 }
 
+.circle-btn.minus:disabled {
+	background-color: #ffb3b3;
+	color: white;
+	cursor: not-allowed;
+	box-shadow: 0 3px 0 0 #cc9999;
+	transform: none;
+}
+
 .circle-btn.plus {
 	box-shadow: 0 3px 0 0 var(--color-plus-shadow);
 }
